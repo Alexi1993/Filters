@@ -1,0 +1,17 @@
+{% extends 'news/default.html' %}
+
+
+{% block title %}
+
+<h1>
+    {% for new in filter.qs %}
+    <center><p>{{ new.title}}</p>
+        <p>{{ new.date_of_pub}}</p>
+    </center>
+    {% endfor %}
+</h1>
+
+{% endblock %}
+{% block content %}
+<p><h3>{{ new.text }}</h3></p>
+{% endblock %}

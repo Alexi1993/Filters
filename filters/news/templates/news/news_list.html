@@ -1,0 +1,64 @@
+{% extends 'news/default.html' %}
+
+{% load static %}
+
+{% block title %} News {% endblock title %}
+
+{% block content %}
+
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+    <input type="submit" value="Search">
+</form>
+<h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Author</th>
+        </tr>
+        </thead>
+        {% for new in filter.qs %}
+        <tbody>
+        <tr>
+
+        <tr>
+            <td>
+                <a href="{% url 'news' new.id %}">{{ new.title }}</a>
+                <a href="{% url 'delete' new.id %}"><u> Удалить </u></a>
+                <a href="{% url 'update' new.id %}"><u> Редактировать </u></a>
+
+            </td>
+            <td>{{ new.category.name }}</td>
+            <td>{{ new.author }}</td>
+            <td>{{ new.date }}</td>
+        </tr>
+        </tbody>
+        </tr>
+        {% endfor %}
+    </table>
+</h5>
+<a href="{% url 'create' %}">Добавить новый товар</a> <br>
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}
+<a href="?page=1">First</a>
+<a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+{% endif %}
+
+{% for num in page_obj.paginator.page_range %}
+{% if page_obj.number == num %}
+<a>{{ num }}</a>
+{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+<a href="?page={{ num }}">{{ num }}</a>
+{% endif %}
+{% endfor %}
+
+{% if page_obj.has_next %}
+<a href="?page={{ page_obj.next_page_number }}">>>></a>
+<a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+{% endif %}
+
+{% endif %}
+{% endblock content %}

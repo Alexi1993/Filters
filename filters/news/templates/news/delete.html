@@ -1,0 +1,24 @@
+{% extends 'news/default.html' %}
+
+{% block title %} News {% endblock title %}
+{% block content %}
+<h2>Вы действительно хотите удалить эту новость?</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Author</th>
+    </tr>
+    </thead>
+    <tr>
+        <td>{{ new.title }}</td>
+        <td>{{ new.category.name }}</td>
+        <td>{{ new.author }}</td>
+    </tr>
+</table>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete"></form>
+{% endblock content %} 
