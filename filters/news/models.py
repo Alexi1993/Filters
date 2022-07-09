@@ -18,7 +18,6 @@ class New(models.Model):
         return f'/news/{self.id}'
 
 
-
 class Category(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
 

@@ -3,9 +3,8 @@
 {% block content %}
 <h2>Authorized user {{request.user.username}}</h2>
 <div> Personal page with personal data</div>
-
 <button><a href="sign/logout/">Выйти</a></button>
-{% if is_not_premium %}
+{% if is_not_authors %}
 <button><a href="sign/upgrade/"> Хочу стать автором!</a></button>
 {% endif %}
-{% endblock %}
+{% endblock content %}

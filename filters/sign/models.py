@@ -4,10 +4,21 @@ from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic.edit import *
+from django.db import models
+from datetime import datetime
 
 
-class AddProduct(PermissionRequiredMixin, CreateView):
-    permission_required = ('shop.add_product',)
+class Subscriber(models.Model):
+    date = models.DateField(default=datetime.utcnow)
+    authors_name = models.CharField(max_length=200)
+    message = models.TextField()
+
+    def __str__(self):
+        return f'{self.authors_name}: {self.message}'
+
+
+class AddAuthor(PermissionRequiredMixin, CreateView):
+    permission_required = ('subscriber.add_author_name',)
 
 
 class MyView(PermissionRequiredMixin, View):
@@ -34,6 +45,6 @@ class BasicSignupForm(SignupForm):
 
     def save(self, request):
         user = super(BasicSignupForm, self).save(request)
-        basic_group = Group.objects.get(name='basic')
-        basic_group.user_set.add(user)
+        common_group = Group.objects.get(name='common')
+        common_group.user_set.add(user)
         return user

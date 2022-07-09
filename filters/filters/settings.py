@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'news',
     'sign',
     'protect',
-
+    'django_apscheduler',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -56,7 +56,6 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -135,7 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/news/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -145,12 +144,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'news/static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 10
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # адрес сервера
+EMAIL_PORT = 587  # порт smtp сервера
+EMAIL_HOST_USER = 'alexeyzhulin6@gmail.com'  # ваше имя пользователя
+EMAIL_HOST_PASSWORD = 'kkgteyzzritnhjwm'  # пароль от почты
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ADMINS = [('Alex', 'alexeyzhulin6@gmail.com')]
+SERVER_EMAIL = 'alexeyzhulin6@gmail.com'
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
