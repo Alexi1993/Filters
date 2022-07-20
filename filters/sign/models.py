@@ -4,17 +4,6 @@ from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic.edit import *
-from django.db import models
-from datetime import datetime
-
-
-class Subscriber(models.Model):
-    date = models.DateField(default=datetime.utcnow)
-    authors_name = models.CharField(max_length=200)
-    message = models.TextField()
-
-    def __str__(self):
-        return f'{self.authors_name}: {self.message}'
 
 
 class AddAuthor(PermissionRequiredMixin, CreateView):

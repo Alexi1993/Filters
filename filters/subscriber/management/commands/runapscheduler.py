@@ -16,8 +16,8 @@ logger = logging.getLogger(__name__)
 # наша задача по выводу текста на экран
 def my_job():
     send_mail(
-        'Job mail',
-        'hello from job!',
+        'Aleks sie uczy',
+        'hello, now you are our subscriber!',
         from_email='alexeyzhulin6@gmail.com',
         recipient_list=['viktoryia.laptsenak@gmail.com'],
     )
@@ -39,7 +39,7 @@ class Command(BaseCommand):
         # добавляем работу нашему задачнику
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger(second="*/10"),
+            trigger=CronTrigger(second="*/100"),
             # То же, что и интервал, но задача тригера таким образом более понятна django
             id="my_job",  # уникальный айди
             max_instances=1,

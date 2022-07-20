@@ -1,0 +1,12 @@
+{% extends "subscriber/newsletter.html" %}
+
+<html>
+{% block content %}
+<h2> Subscription </h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Subscribe">
+</form>
+{% endblock %}
+</html>
