@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title> News board</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">News board</a></h1>
+        </div>
+        <div>
+            <button>
+                <a href="{% url 'new_news'%}"> Новая рассылка! </a>
+            </button>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+
+{% block content %}
+<table>
+    <thead>
+    <tr>
+        <th>Статья</th>
+        <th>Автор</th>
+        <th>Дата</th>
+        <th>Категория</th>
+    </tr>
+    </thead>
+
+    {% for new in news %}
+    <tr>
+        <th>{{ new.id }}</th>
+        <th>{{ new.date }}</th>
+        <th>{{ new.time_in|time:"H:i" }}</th>
+        <th>{% if not new.complete %}
+            Новостей еще нет!
+            {% elif new.time_out is None %}
+            <button><a href="{% url 'take_new' new.id %}"> Получить рассылку! </a></button>
+            {% else %}
+            Рассылка получена! {{ new.time_out|time:"H:i" }}
+            {% endif %}
+        </th>
+
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

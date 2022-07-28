@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'protect',
     'subscriber.apps.SubscriberConfig',
     'django_apscheduler',
+    'tasks',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -143,7 +144,7 @@ STATIC_URL = '/news/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/news/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'news/static')]
 ACCOUNT_EMAIL_REQUIRED = True
@@ -168,3 +169,9 @@ SERVER_EMAIL = 'alexeyzhulin6@gmail.com'
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

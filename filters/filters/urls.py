@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('protect.urls')),
     path('sign/', include('sign.urls')),
     path('accounts/', include('allauth.urls')),
+    path('', include('tasks.urls')),
     path('subscriber/', include(('subscriber.urls', 'subscriber'), namespace='subscriber')),
 ]
